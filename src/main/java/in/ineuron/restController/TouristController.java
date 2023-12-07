@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import in.ineuron.exception.TouristNotFoundException;
 import in.ineuron.model.Tourist;
 import in.ineuron.service.ITouristMgmtService;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/tourist")
@@ -27,6 +28,7 @@ public class TouristController {
 	private ITouristMgmtService service;
 	
 	@PostMapping("/reg")
+	@ApiOperation("For Tourist Registration")
 	public ResponseEntity<String> enrollTourist(@RequestBody Tourist tourist){
 		
 		String	body= service.registerTourist(tourist);
@@ -35,6 +37,7 @@ public class TouristController {
 	}
 	
 	@GetMapping("/fetchTourists")
+	@ApiOperation("Get all tourists ")
 	public ResponseEntity<List<Tourist>> getAllTourist(){
 		
 			List<Tourist> tourists = service.fetAllTourist();
@@ -43,6 +46,7 @@ public class TouristController {
 		
 	}
 	@GetMapping("/find/{tid}")
+	@ApiOperation("Get tourist by Id")
 	public ResponseEntity<Tourist> geTouristById(@PathVariable Integer tid){
 		
 			Tourist tourist = service.findTouristById(tid);
@@ -52,6 +56,7 @@ public class TouristController {
 	}
 	
 	@PutMapping("/modify")
+	@ApiOperation("To update tourist")
 	public ResponseEntity<String> updateTourist(@RequestBody Tourist tourist){
 		
 		
@@ -61,12 +66,14 @@ public class TouristController {
 	}
 	
 	@PatchMapping("/budgetModify/{tid}/{hike}")
+	@ApiOperation("Update Budget of tourist")
 	public ResponseEntity<String> updateTouristBudgetById(@PathVariable Integer tid,@PathVariable Float hike){		
 			String body= service.updateTouristBudgetById(tid, hike);
 			return new ResponseEntity<String>(body,HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/deleteTourist/{tid}")
+	@ApiOperation("Remove tourist by Id")
 	public ResponseEntity<String> deleteTouristById(@PathVariable Integer tid){
 		
 			String body= service.deleteTouristById(tid);

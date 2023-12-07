@@ -18,8 +18,6 @@ public class TouristErrorControllerAdvice {
 		System.out.println("TouristErrorControllerAdvice.handleTouristNotFound()");
 		
 		ErrorDetails error = new ErrorDetails(LocalDateTime.now(), tf.getMessage(), "404-Not Found");
-		
-		
 		return new ResponseEntity<ErrorDetails>(error,HttpStatus.NOT_FOUND);
 	}
 	
